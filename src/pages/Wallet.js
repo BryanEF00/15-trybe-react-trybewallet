@@ -1,12 +1,13 @@
-import React from 'react';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchCurrencyRate } from '../actions';
 import Header from '../components/Header';
-import fetchApi from '../services/api';
 
-class Wallet extends React.Component {
-  async componentDidMount() {
-    const test = await fetchApi();
-
-    console.log(test);
+class Wallet extends Component {
+  componentDidMount() {
+    const { getCurrentCurrencyRate } = this.props;
+    getCurrentCurrencyRate();
   }
 
   render() {
@@ -21,4 +22,12 @@ class Wallet extends React.Component {
   }
 }
 
-export default Wallet;
+Wallet.propTypes = {
+  getCurrentCurrencyRate: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  getCurrentCurrencyRate: () => dispatch(fetchCurrencyRate()),
+});
+
+export default connect(null, mapDispatchToProps)(Wallet);

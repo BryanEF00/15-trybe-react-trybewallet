@@ -1,10 +1,11 @@
 const END_POINT = 'https://economia.awesomeapi.com.br/json/all';
 
-const fetchApi = async () => {
+const getCurrencyRate = async () => {
   const response = await fetch(END_POINT);
   const json = await response.json();
+  const data = Object.entries(json);
 
-  return Promise.resolve(json);
+  return data;
 };
 
-export default fetchApi;
+export default getCurrencyRate;
