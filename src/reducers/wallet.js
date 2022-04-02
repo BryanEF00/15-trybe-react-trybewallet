@@ -1,4 +1,4 @@
-import { RECIEVE_CURRENCY_RATE, SAVE_EXPENSE } from '../actions';
+import { RECIEVE_CURRENCY_RATE, REMOVE_EXPENSE, SAVE_EXPENSE } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -8,6 +8,9 @@ const INITIAL_STATE = {
 const getCurrencyAbbreviation = (currencies) => currencies
   .map(([key]) => key)
   .filter((value) => value !== 'USDT');
+
+const filterExpenses = (state, id) => state
+  .filter((expenses) => expenses.id !== id);
 
 const wallet = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -20,6 +23,11 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       expenses: [...state.expenses, action.expenses],
+    };
+  case REMOVE_EXPENSE:
+    return {
+      ...state,
+      expenses: filterExpenses(state.expenses, action.id),
     };
 
   default: return state;
