@@ -47,7 +47,7 @@ class TableHeader extends Component {
             const fixedAsk = parseFloat(ask).toFixed(2);
             const conversionCurrency = 'Real';
 
-            const convertedValue = (fixedValue * ask).toFixed(2);
+            const convertedValue = (value * ask).toFixed(2);
 
             const rowInfo = [
               description, tag, method, fixedValue, currencyName, fixedAsk,
@@ -56,7 +56,9 @@ class TableHeader extends Component {
 
             return (
               <tr key={ id }>
-                {rowInfo.map((info) => (<td key={ `id:${info}` }>{info}</td>))}
+                {rowInfo.map((info, index) => (
+                  <td key={ `id:${tableData[index]}` }>{info}</td>
+                ))}
               </tr>
             );
           })}
