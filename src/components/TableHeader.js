@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import DeleteBtn from './DeleteBtn';
+import TableBtn from './TableBtn';
 
 class TableHeader extends Component {
   getExchangeInfo = (exchangeRates, currency) => {
@@ -50,7 +50,7 @@ class TableHeader extends Component {
 
             const convertedValue = (value * ask).toFixed(2);
 
-            const deleteBtn = <DeleteBtn />;
+            const deleteBtn = <TableBtn />;
             const rowInfo = [
               description, tag, method, fixedValue, currencyName, fixedAsk,
               convertedValue, conversionCurrency, deleteBtn,
@@ -61,7 +61,7 @@ class TableHeader extends Component {
                 {rowInfo.map((info, index) => (
                   <td key={ `id:${tableData[index]}` }>
                     {info === deleteBtn
-                      ? <DeleteBtn expenseID={ id } />
+                      ? <TableBtn expenseID={ id } />
                       : info }
                   </td>
                 ))}
